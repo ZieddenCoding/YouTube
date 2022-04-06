@@ -11,7 +11,7 @@ namespace YoutubeProjekt1
     {
         static void Main(string[] args)
         {
-            /*Excel.Application app = new Excel.Application();
+            Excel.Application app = new Excel.Application();
             app.Visible = true;
             Excel.Workbook workbook = app.Workbooks.Add();
             Excel.Worksheet sheet = workbook.Worksheets.Add();
@@ -19,10 +19,10 @@ namespace YoutubeProjekt1
             for (int i = 1; i < 11; i++)
             {
                 sheet.Range[$"A{i}"].Value = "Test";
-            }*/
+            }
             Console.WriteLine(((char)65).ToString());
             Console.ReadKey();
-            //app.Quit();
+            app.Quit();
         }
 
     }
