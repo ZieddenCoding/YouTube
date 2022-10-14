@@ -1,0 +1,994 @@
+@font-face {
+    font-family: 'Conv_GothamNarrow-Book';
+    src: url('../fonts/GothamNarrow-Book.eot');
+    src: local('☺'), url('../fonts/GothamNarrow-Book.woff') format('woff'), url('../fonts/GothamNarrow-Book.ttf') format('truetype'), url('../fonts/GothamNarrow-Book.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_GothamNarrow-MediumItalic';
+    src: url('../fonts/GothamNarrow-MediumItalic.eot');
+    src: local('☺'), url('../fonts/GothamNarrow-MediumItalic.woff') format('woff'), url('../fonts/GothamNarrow-MediumItalic.ttf') format('truetype'), url('../fonts/GothamNarrow-MediumItalic.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_GothamNarrow-Bold';
+    src: url('../fonts/GothamNarrow-Bold.eot');
+    src: local('☺'), url('../fonts/GothamNarrow-Bold.woff') format('woff'), url('../fonts/GothamNarrow-Bold.ttf') format('truetype'), url('../fonts/GothamNarrow-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_GothamNarrow-Medium';
+    src: url('../fonts/GothamNarrow-Medium.eot');
+    src: local('☺'), url('../fonts/GothamNarrow-Medium.woff') format('woff'), url('../fonts/GothamNarrow-Medium.ttf') format('truetype'), url('../fonts/GothamNarrow-Medium.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#container{
+    cursor: pointer;
+}
+
+#content
+{
+
+}
+
+#content #slider{
+    width: 970px;
+    height: 90px;
+    left: 0;
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    z-index: 2;
+    overflow: hidden;
+    list-style-image: none;
+}
+
+/************************ LISTA FRAMES ************************/
+#content #slider ul{
+    width:970px;
+    height:90px;
+    position: absolute;
+}
+
+#content #slider ul li{
+    width:970px;
+    height:90px;
+    position: absolute;
+    margin: 0;
+    visibility: hidden;
+}
+#content #slider ul li .frame{
+    width: 970px;
+    height: 90px;
+    visibility: visible;
+}
+
+#content #slider ul li .frame .frame_content{
+    position: absolute;
+    /* width: 380px; */
+    width: 360px;
+    height: 74px;
+    bottom: 8px;
+    left: 8px;
+    display: table;
+}
+
+#content #slider ul li .frame .frame_content_btn{
+    position: absolute;
+    width: 380px;
+    height: 74px;
+    bottom: 8px;
+    left: 8px;
+    display: table;
+}
+
+/************************ ACELERADOR ************************/
+.mask{
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    -ms-transform: skewY(8deg);
+    -webkit-transform: skewY(8deg);
+    -moz-transform: skewY(8deg);
+    transform: skewY(8deg);
+}
+.mask .acelerador{
+    background: #f0a321;
+    height: 100%;
+    width: 0;
+    position: absolute;
+    left: 516px;
+    bottom: 0;
+}
+.acelerador_text{
+    width: 74px;
+    color: #003262;
+    font-family: 'Conv_GothamNarrow-Bold';
+    font-size: 9px;
+    text-align: center;
+    line-height: 13px;
+    position: absolute;
+    bottom: 10px;
+    left: 520px;
+    opacity: 0;
+}
+.acelerador_text span{
+    font-size: 14px;
+}
+
+
+/************************ FRAME TIPO 1 ************************/
+#content #slider ul li.frame_t_1{
+
+}
+
+#content #slider ul li.frame_t_1 span{
+    max-width: 380px;
+}
+
+#content #slider ul li.frame_t_1 span.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 18px;
+    /*float: left;*/
+    line-height: 20px;
+    /*position: relative;*/
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/************************ FRAME TIPO 2 ************************/
+#content #slider ul li.frame_t_2{
+
+}
+
+#content #slider ul li.frame_t_2 span{
+    max-width: 260px;
+}
+
+#content #slider ul li.frame_t_2 span.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 15px;
+    /*float: left;*/
+    line-height: 20px;
+    /*position: relative;*/
+    /*bottom: 45px;*/
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/************************ FRAME TIPO 3 ************************/
+
+#content #slider ul li.frame_t_3{
+
+}
+
+#content #slider ul li.frame_t_3 p.texto{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+#content #slider ul li.frame_t_3 .frame_content span{
+    max-width: 380px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_3 span.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#content #slider ul li.frame_t_3 span.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/************************ FRAME TIPO 4 ************************/
+#content #slider ul li.frame_t_4{
+
+}
+
+#content #slider ul li.frame_t_4 span{
+    max-width: 380px;
+}
+
+#content #slider ul li.frame_t_4 span.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 15px;
+    line-height: 18px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/************************ FRAME TIPO 5 ************************/
+
+#content #slider ul li.frame_t_5{
+
+}
+
+#content #slider ul li.frame_t_5 p.texto{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+#content #slider ul li.frame_t_5 span{
+    max-width: 380px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_5 span.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+#content #slider ul li.frame_t_5 span.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 21px;
+    line-height: 21px;
+    padding-top: 2px;
+}
+
+#content #slider ul li.frame_t_5 span.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 16px;
+    line-height: 16px;
+    padding-top: 0px;
+}
+
+/************************ FRAME TIPO 5 BOTÓN************************/
+
+#content #slider ul li.frame_t_5_btn{
+
+}
+
+#content #slider ul li.frame_t_5_btn p.texto{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+#content #slider ul li.frame_t_5_btn span{
+    max-width: 380px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_5_btn span.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+#content #slider ul li.frame_t_5_btn span.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 21px;
+    line-height: 21px;
+    padding-top: 0px;
+}
+
+#content #slider ul li.frame_t_5_btn span.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 16px;
+    line-height: 16px;
+    padding-top: 2px;
+}
+
+/************************ FRAME TIPO 6 ************************/
+#content #slider ul li.frame_t_6{
+
+}
+
+#content #slider ul li.frame_t_6 p{
+    max-width: 380px;
+    position: absolute;
+}
+
+#content #slider ul li.frame_t_6 p.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 19px;
+    float: left;
+    line-height: 21px;
+    /* bottom: 70px; */
+    position: relative;
+    width: 380px;
+    height: 21px;
+    /* max-height: 38px; */
+}
+
+/************************ FRAME TIPO 7 ************************/
+#content #slider ul li.frame_t_7{
+
+}
+
+#content #slider ul li.frame_t_7 p{
+    max-width: 380px;
+    position: absolute;
+}
+
+#content #slider ul li.frame_t_7 p.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 24px;
+    float: left;
+    line-height: 24px;
+    position: relative;
+    width: 380px;
+    height: 24px;
+}
+
+#content #slider ul li.frame_t_7 p.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 14px;
+    line-height: 14px;
+    position: relative;
+    clear: both;
+    width: 380px;
+    height: 14px;
+}
+
+#content #slider ul li.frame_t_7 p.oferta{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 20px;
+    color: #003262;
+    position: relative !important;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 26px;
+    margin-top: 10px;
+}
+
+
+#content #slider ul li.frame_t_7 p.oferta span{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 22px;
+    height: 22px;
+}
+
+/************************ FRAME TIPO 8 ************************/
+#content #slider ul li.frame_t_8{
+
+}
+
+#content #slider ul li.frame_t_8 p{
+    max-width: 380px;
+    position: absolute;
+}
+
+#content #slider ul li.frame_t_8 p.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 20px;
+    float: left;
+    line-height: 22px;
+    /* bottom: 70px; */
+    position: relative;
+    width: 380px;
+    height: 24px;
+}
+
+#content #slider ul li.frame_t_8 p.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 15px;
+    float: left;
+    line-height: 22px;
+    /* bottom: 70px; */
+    position: relative;
+    clear: both;
+    width: 380px;
+    height: 22px;
+    margin-top: 0px;
+}
+
+#content #slider ul li.frame_t_8 p.oferta{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 17px;
+    color: #003262;
+    position: relative !important;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 26px;
+    margin-top: 2px;
+}
+
+
+#content #slider ul li.frame_t_8 p.oferta span{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 22px;
+    height: 22px;
+}
+
+/************************ FRAME TIPO 9 ************************/
+
+#content #slider ul li.frame_t_9{
+
+}
+
+#content #slider ul li.frame_t_9 p.texto{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+#content #slider ul li.frame_t_9 span{
+    max-width: 258px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_9 span.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 21px;
+    line-height: 20px;
+}
+
+#content #slider ul li.frame_t_9 span.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 12px;
+    line-height: 14px;
+    padding-top: 0px;
+}
+
+/************************ FRAME TIPO 9 BOTÓN************************/
+
+#content #slider ul li.frame_t_9_btn{
+
+}
+
+#content #slider ul li.frame_t_9_btn p{
+    max-width: 258px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_9_btn p.title1{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 19px;
+    line-height: 16px;
+    /*height: 34px;*/
+    position: relative;
+}
+
+#content #slider ul li.frame_t_9_btn p.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 0px;
+/*    height: 15px;*/
+    position: relative;
+}
+
+/************************ FRAME TIPO 10 ************************/
+
+#content #slider ul li.frame_t_10{
+
+}
+
+#content #slider ul li.frame_t_10 p.texto{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+#content #slider ul li.frame_t_10 span{
+    max-width: 258px;
+    display: block;
+}
+
+#content #slider ul li.frame_t_10 span.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 19px;
+    line-height: 18px;
+    padding-top: 2px;
+}
+
+#content #slider ul li.frame_t_10 span.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 12px;
+    line-height: 14px;
+    padding-top: 0px;
+}
+
+/************************ FRAME TIPO 10 BOTÓN************************/
+
+#content #slider ul li.frame_t_10_btn{
+
+}
+
+#content #slider ul li.frame_t_10_btn p{
+    max-width: 258px;
+    display: block;
+}
+
+
+#content #slider ul li.frame_t_10_btn p.title2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 16px;
+    line-height: 16px;
+    padding-top: 0px;
+    position: relative;
+}
+
+#content #slider ul li.frame_t_10_btn p.copy{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    font-size: 14px;
+    line-height: 15px;
+    padding-top: 0px;
+    height: 46px;
+    position: relative;
+}
+
+/************************ BOTON ************************/
+#content #slider .boton{
+    width: auto;
+    height: 32px;
+    font-size: 12px;
+    float: left;
+    background-color: #003262;
+    color: #ffffff;
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    font-family: 'Conv_GothamNarrow-Bold';
+    font-style: italic;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+}
+#content #slider .boton img{
+    position: absolute;
+    top: 11px;
+    left: 12px;
+}
+#content #slider .boton p{
+    /*display: none;*/
+    width: auto !important;
+    height: 32px;
+    line-height: 32px;
+    color: #ffffff;
+    text-align: center;
+    margin-left: 28px !important;
+    margin-right: 12px;
+    position: relative !important;
+    margin-top: 1px;
+}
+
+/************************ Button RIGHT ************************/
+#content #slider .boton_right{
+    width: auto;
+    height: 32px;
+    font-size: 12px;*/
+    float: right;
+    background-color: #003262;
+    color: #ffffff;
+    position: absolute;
+    bottom: 10px;
+    right: 463px !important;
+    font-family: 'Conv_GothamNarrow-Bold';
+    font-style: italic;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+}
+
+#content #slider .boton_right img{
+    position: absolute;
+    top: 11px;
+    left: 12px;
+}
+#content #slider .boton_right p{
+    /*display: none;*/
+    width: auto !important;
+    height: 32px;
+    line-height: 32px;
+    color: #ffffff;
+    text-align: center;
+    margin-left: 28px !important;
+    margin-right: 12px;
+    position: relative !important;
+    margin-top: 1px;
+}
+
+/************************ OFERTA ************************/
+#content #slider .oferta1{
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    position: relative;
+    float: left;
+    clear: both;
+    display: inline-block;
+    height: 51px;
+    margin-top: -2px;
+}
+
+#content #slider .oferta1 #texto1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    position: relative;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 18px;
+    padding-top: 0px;
+    min-width: 73px;
+}
+#content #slider .oferta1 #bloque1{
+    position: relative;
+    float: left;
+    clear: both;
+    margin-top: -10px;
+}
+
+#content #slider .oferta1 #bloque2{
+    position: relative;
+    top: 6px;
+    float: left;
+}
+
+#content #slider .oferta1 #descuento{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 40px;
+    position: relative;
+    height: 51px;
+    float: left;
+}
+
+#content #slider .oferta1 #porcentaje{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 28px;
+    position: relative;
+    bottom: 0px;
+    padding-top: 4px;
+    padding-right: 0px;
+/*    float: left;*/
+    display: inline-block;
+}
+#content #slider .oferta1 #texto2_1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    position: relative;
+    height: 11px;
+    margin-top: -4px;
+    padding-bottom: 16px;
+    padding-right: 10px;
+/*
+    float: left;
+    clear: both;
+*/
+    display: inline-block;
+}
+#content #slider .oferta1 #texto2_2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    position: relative;
+    margin-top: -13px;
+    float: left;
+    clear: both;
+    height: 15px;
+}
+
+#content #slider .oferta2{
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    position: relative;
+    float: left;
+    clear: both;
+    display: inline-block;
+    height: 56px;
+    margin-top: -2px;
+}
+
+#content #slider .oferta2 #texto1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    position: relative;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 18px;
+    padding-top: 0px;
+    min-width: 73px;
+}
+#content #slider .oferta2 #bloque1{
+    position: relative;
+    float: left;
+    clear: both;
+    margin-top: -10px;
+}
+
+#content #slider .oferta2 #bloque2{
+    position: relative;
+    float: left;
+}
+
+#content #slider .oferta2 #descuento{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 38px;
+    position: relative;
+    height: 51px;
+    float: left;
+}
+#content #slider .oferta2 #porcentaje{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 19px;
+    position: relative;
+    bottom: 0px;
+    padding-top: 16px;
+    padding-right: 5px;
+    float: left;
+    height: 40px;
+}
+#content #slider .oferta2 #texto2_2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    position: relative;
+    margin-top: -15px;
+    float: left;
+    clear: both;
+    height: 15px;
+}
+
+/************************ OFERTA ************************/
+#content #slider .oferta3{
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    position: relative;
+    float: left;
+    clear: both;
+    display: inline-block;
+    height: 46px;
+    margin-top: -6px;
+    padding-top: 8px;
+}
+
+#content #slider .oferta3 #texto1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    position: relative;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 18px;
+    padding-top: 0px;
+    min-width: 73px;
+}
+#content #slider .oferta3 #bloque1{
+    position: relative;
+    float: left;
+    clear: both;
+    margin-top: -14px;
+}
+
+#content #slider .oferta3 #bloque2{
+    position: relative;
+    float: left;
+}
+
+#content #slider .oferta3 #descuento{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 38px;
+    position: relative;
+    height: 38px;
+    float: left;
+}
+
+#content #slider .oferta3 #porcentaje{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 22px;
+    position: relative;
+    bottom: 0px;
+    padding-top: 4px;
+    padding-right: 5px;
+    float: left;
+}
+#content #slider .oferta3 #texto2_1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    position: relative;
+    height: 10px;
+    margin-top: -4px;
+    /* padding-bottom: 16px; */
+    padding-right: 10px;
+    float: left;
+    clear: both;
+}
+
+#content #slider .oferta4{
+    -webkit-font-smoothing: antialiased;
+    color: #003262;
+    position: relative;
+    float: left;
+    clear: both;
+    display: inline-block;
+    height: 33px;
+    margin-top: 7px;
+}
+
+#content #slider .oferta4 #texto1{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    position: relative;
+    width: auto;
+    z-index: 2;
+    float: left;
+    height: 18px;
+    padding-top: 0px;
+    min-width: 73px;
+}
+#content #slider .oferta4 #bloque1{
+    position: relative;
+    float: left;
+    clear: both;
+    margin-top: -10px;
+}
+
+#content #slider .oferta4 #bloque2{
+    position: relative;
+    float: left;
+}
+
+#content #slider .oferta4 #descuento{
+    font-family: 'Conv_GothamNarrow-Bold';
+    -webkit-font-smoothing: antialiased;
+    font-size: 24px;
+    position: relative;
+    height: 24px;
+    float: left;
+}
+#content #slider .oferta4 #porcentaje{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 13px;
+    position: relative;
+    bottom: 0px;
+    padding-top: 2px;
+    padding-right: 5px;
+    float: left;
+    height: 13px;
+}
+#content #slider .oferta4 #texto2_2{
+    font-family: 'Conv_GothamNarrow-Medium';
+    -webkit-font-smoothing: antialiased;
+    font-size: 10px;
+    position: relative;
+    margin-top: 0px;
+    float: left;
+    clear: both;
+    height: 15px;
+}
+
+#content #slider #nota{
+    font-family: 'Conv_GothamNarrow-Book';
+    -webkit-font-smoothing: antialiased;
+    font-size: 7px;
+    color: #ffffff;
+    position: absolute;
+    bottom: 1px;
+    width: 200px;
+    transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    height: 10px;
+    right: 212px;
+    overflow: hidden;
+}
+
+#content #slider #nota p:nth-child(1) {
+    animation: left-one 10s linear infinite;
+    -moz-animation: left-one 10s linear infinite;
+    -webkit-animation: left-one 10s linear infinite;
+}
+
+/** Mozilla Firefox Keyframes **/
+@-moz-keyframes left-one {
+    0%  {
+        -moz-transform:translateX(100%);
+    }
+    25% {
+        -moz-transform:translateX(50%);
+    }
+    50% {
+        -moz-transform:translateX(0%);
+    }
+    75% {
+        -moz-transform:translateX(-50%);
+    }
+    100%{
+        -moz-transform:translateX(-100%);
+    }
+}
+/** Webkit Keyframes **/
+@-webkit-keyframes left-one {
+    0% {
+        -webkit-transform:translateX(100%);
+    }
+    25% {
+        -webkit-transform:translateX(50%);
+    }
+    50% {
+        -webkit-transform:translateX(0%);
+    }
+    75% {
+        -webkit-transform:translateX(-50%);
+    }
+    100%{
+        -webkit-transform:translateX(-100%);
+    }
+}
+
+
+/************************ LOGO ************************/
+#content #logo{
+    width: 70px;
+    height: 70px;
+    right: 0;
+    position: absolute;
+    top: 10px;
+    z-index: 3;
+}

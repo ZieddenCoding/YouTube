@@ -1,0 +1,1230 @@
+var NHDYNAMIC = {};
+
+function T$(id)
+{
+	return document.getElementById(id);
+}
+function T$$(element,padre)
+{
+	return padre.getElementsByTagName(element);
+}
+
+NHDYNAMIC.frames = function(){
+
+	frame = function(nombre, opciones)
+	{
+		this.nombre = nombre;
+		this.init(opciones);
+	}
+
+	processDynamic = function(dynamicdata, size)
+	{
+
+		var aFrames = new Array();
+
+		var i=1;
+		for(i;i<=8;i++)
+		{
+			if(dynamicdata['frame_'+i+'_active']==true)
+			{
+				var frame
+				var type=1;
+				var texto='';
+				var oferta;
+				var title1='';
+				var title2='';
+				var tit_order;
+				var top;
+				var align='';
+				var button='';
+				var image='';
+                var legal = '';
+
+				if(dynamicdata['frame_'+i+'_tit_1'] != '') // Título 1
+				{
+					if(dynamicdata['frame_'+i+'_tit_2'] != '') // Título 2
+					{
+						if(dynamicdata['frame_'+i+'_text'] != '') // Texto
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta
+							{
+								continue;
+							}
+							else // Oferta NO ---- V5 (T1+T2+Texto)
+							{
+								type=5;
+								texto=dynamicdata['frame_'+i+'_text'];
+							}
+						}
+						else // Texto NO
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta ----- V8 (T1+T2+Oferta)
+							{
+								type=8;
+								var auxOferta = {texto_1: dynamicdata['oferta_txt_1'], descuento: dynamicdata['oferta_desc'], texto_2_1: dynamicdata['oferta_txt_2_1'], texto_2_2: dynamicdata['oferta_txt_2_2'], nota: dynamicdata['oferta_nota']};
+								oferta = new NHDYNAMIC.oferta.oferta(auxOferta);
+							}
+							else // Oferta NO ----- V3 (T1+T2)
+							{
+								type=3;
+							}
+						}
+					}
+					else // Título 2 NO
+					{
+						if(dynamicdata['frame_'+i+'_text'] != '') // Texto
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta ----- V7 (T1+Texto+Oferta)
+							{
+								type=7;
+								texto=dynamicdata['frame_'+i+'_text'];
+								var auxOferta = {texto_1: dynamicdata['oferta_txt_1'], descuento: dynamicdata['oferta_desc'], texto_2_1: dynamicdata['oferta_txt_2_1'], texto_2_2: dynamicdata['oferta_txt_2_2'], nota: dynamicdata['oferta_nota']};
+								oferta = new NHDYNAMIC.oferta.oferta(auxOferta);
+							}
+							else // Oferta NO ----- V9 (T1+Texto)
+							{
+								type=9;
+								texto=dynamicdata['frame_'+i+'_text'];
+							}
+						}
+						else // Texto NO
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta ----- V6 (T1+Oferta)
+							{
+								type=6;
+								var auxOferta = {texto_1: dynamicdata['oferta_txt_1'], descuento: dynamicdata['oferta_desc'], texto_2_1: dynamicdata['oferta_txt_2_1'], texto_2_2: dynamicdata['oferta_txt_2_2'], nota: dynamicdata['oferta_nota']};
+								oferta = new NHDYNAMIC.oferta.oferta(auxOferta);
+							}
+							else // Oferta NO ----- V1 (T1)
+							{
+								type=1;
+                                legal = dynamicdata['oferta_nota'];
+							}
+						}
+					}
+				}
+				else // Título 1 NO
+				{
+					if(dynamicdata['frame_'+i+'_tit_2'] != '') // Título 2
+					{
+						if(dynamicdata['frame_'+i+'_text'] != '') // Texto
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta
+							{
+								continue;
+							}
+							else // Oferta NO  ----- V10 (T2+Texto)
+							{
+								type=10;
+								texto=dynamicdata['frame_'+i+'_text'];
+							}
+						}
+						else // Texto NO
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta
+							{
+								continue;
+							}
+							else // Oferta NO ----- V2 (T2)
+							{
+								type=2;
+                                legal = dynamicdata['oferta_nota'];
+							}
+						}
+					}
+					else // Título 2 NO
+					{
+						if(dynamicdata['frame_'+i+'_text'] != '') // Texto
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta
+							{
+								continue;
+							}
+							else // Oferta NO ----- V4 (Texto)
+							{
+								type=4;
+								texto=dynamicdata['frame_'+i+'_text'];
+							}
+						}
+						else // Texto NO
+						{
+							if(dynamicdata['frame_'+i+'_oferta']==true) // Oferta
+							{
+								type=6;
+								var auxOferta = {texto_1: dynamicdata['oferta_txt_1'], descuento: dynamicdata['oferta_desc'], texto_2_1: dynamicdata['oferta_txt_2_1'], texto_2_2: dynamicdata['oferta_txt_2_2'], nota: dynamicdata['oferta_nota']};
+								oferta = new NHDYNAMIC.oferta.oferta(auxOferta);
+							}
+							else // Oferta NO
+							{
+								continue;
+							}
+						}
+					}
+				}
+
+				title1=dynamicdata['frame_'+i+'_tit_1'];
+				title2=dynamicdata['frame_'+i+'_tit_2'];
+				tit_order=dynamicdata['frame_'+i+'_tit_order'];
+				button=dynamicdata['frame_'+i+'_btn'];
+				align=(dynamicdata['frame_'+i+'_align']==''?'':(dynamicdata['frame_'+i+'_align']=='right'?dynamicdata['frame_'+i+'_align']:''));
+
+
+				var auxTop = dynamicdata['frame_'+i+'_top'].split("|");
+				var aTop = null;
+
+				if(auxTop!='' && auxTop.length>0)
+				{
+					aTop = new Array();
+					for(var j=0; j<auxTop.length; j++)
+					{
+						var jAux = auxTop[j].split("=");
+						aTop[jAux[0]]=jAux[1];
+
+					}
+				}
+
+				if(aTop!=null)
+				{
+					top=aTop[size];
+				}
+				else
+				{
+					top="";
+				}
+
+				//image = dynamicdata['Imagenes_fondo']['background_'+size+'_'+i+'.jpg'].Url;
+				image = '';
+
+				var opciones = {title1: title1, title2: title2, tit_order: tit_order, texto: texto, align: align, top:top, oferta: oferta, image: image, btn: button, legal:legal};
+
+				frame = new NHDYNAMIC.frame.frame(type, opciones);
+
+				aFrames.push(frame);
+
+			}
+		}
+
+		return aFrames;
+
+
+	}
+
+	splitSpan = function(element){
+
+		element.each(function(){
+
+			var type = $(this).parent().parent().attr("data-type");
+            var $this = $(this);
+            var originalText = $this.html();
+            $this.empty();
+
+            var sections = [];
+
+            var tagB = false;
+
+            $.each( originalText.split(" "), function(){
+
+              	if(this.toUpperCase().indexOf('<B>')>=0)
+            	{
+            		tagB = true;
+            	}
+
+            	var $span;
+            	if(tagB)
+            	{
+            		$span = $("<span><B>" + this + "</B></span>");
+            	}
+            	else
+            	{
+            		$span = $("<span>" + this + "</span>");
+            	}
+
+            	if(this.toUpperCase().indexOf('</B>')>=0)
+            	{
+            		tagB = false;
+            	}
+                $this.append($span);
+
+                var index = parseInt($span.position().top);
+
+                if( sections[index] === undefined ){
+                    sections[index] = "";
+                }
+
+                sections[index] += $span.html() + " ";
+
+                // var $span = $("<span>" + this + "</span>");
+                // $this.append($span);
+
+                // var index = parseInt($span.position().top);
+
+                // if( sections[index] === undefined ){
+                //     sections[index] = "";
+                // }
+
+                // sections[index] += $span.html() + " ";
+            });
+
+            $this.empty();
+
+            var first_span = 0;
+
+            for(var i = 0; i< sections.length; i++){
+                if( sections[i] !== undefined ){
+
+                	first_span++;
+
+                    var spanText = $.trim(sections[i]);
+
+                    var margin_bottom='';
+                    if(type==3 && i<sections.length-1)
+                    {
+                    	margin_bottom = ' margin-bottom: -5px;';
+                    }
+                    else
+                    {
+                    	margin_bottom='';
+                    }
+
+                    if(spanText.toUpperCase().indexOf('<BR>') >= 0 )
+                    {
+
+                        var index_next = 0;
+                        for(var j=i+1; j<sections.length; j++)
+                        {
+                            if(sections[j] !== undefined)
+                            {
+                                index_next = j;
+                                break;
+                            }
+                        }
+
+                        if(index_next != 0)
+                        {
+                            sections[i] = $.trim(spanText.substring(0,spanText.toUpperCase().indexOf('<BR>')));
+                            sections[index_next] = $.trim(spanText.substring(spanText.toUpperCase().indexOf('<BR>')+4)) + " " + sections[index_next];
+                            if(first_span==1 && $this.index()==0)
+                            {
+                            	$this.append('<span class="title" style="margin-top: 0px;' + margin_bottom + '">' + sections[i] + '</span>');
+                            }
+                            else
+                            {
+                            	$this.append('<span style="' + margin_bottom + '" class="title">' + sections[i] + '</span>');
+                            }
+                        }
+                        else
+                        {
+                            sections[sections.length + 1] = $.trim(spanText.substring(spanText.toUpperCase().indexOf('<BR>')+4));
+                            sections[i] = $.trim(spanText.substring(0,spanText.toUpperCase().indexOf('<BR>')));
+                            if(first_span==1 && $this.index()==0)
+                            {
+                            	$this.append('<span class="title" style="margin-top: 0px;' + margin_bottom + '">' + sections[i] + '</span>');
+                            }
+                            else
+                            {
+                            	$this.append('<span style="' + margin_bottom + '" class="title">' + sections[i] + '</span>');
+                            }
+                        }
+                    }
+                    else
+                    {
+                    	if(first_span==1 && $this.index()==0)
+                        {
+                        	$this.append('<span class="title" style="margin-top: 0px;' + margin_bottom + '">' + spanText + '</span>');
+                        }
+                        else
+                        {
+                        	$this.append('<span style="' + margin_bottom + '" class="title">' + spanText + '</span>');
+                        }
+                    }
+                }
+            }
+
+        });
+    }
+
+    drawBottons = function(parent)
+    {
+    	for(var i=0; i<parent.length; i++)
+    	{
+    		parent[i].style.width = (parseInt(T$$('p',parent[i])[0].style.width.replace('px')) + parseInt(T$$('img',parent[i])[0].style.width.replace('px')) + 8) + 'px';
+    	}
+    }
+
+	drawFrames = function(framesdynamic, framesUL)
+	{
+
+		var strHTML = '';
+		for(var i=0;i<framesdynamic.length;i++)
+		{
+			var align='';
+			var top='';
+
+			if(framesdynamic[i].type==1 || framesdynamic[i].type==2 || framesdynamic[i].type==3 || framesdynamic[i].type==4 || framesdynamic[i].type==5)
+			{
+				if(framesdynamic[i].align!='')
+				{
+					align = '_' + framesdynamic[i].align;
+				}
+				else
+				{
+					align = '';
+				}
+
+				if(framesdynamic[i].top!== undefined && framesdynamic[i].top!='')
+				{
+					top=framesdynamic[i].top;
+				}
+				else
+				{
+					top='';
+				}
+			}
+
+			if((framesdynamic[i].type==5 || framesdynamic[i].type==9 || framesdynamic[i].type==10) && framesdynamic[i].btn!='')
+			{
+				strHTML += '<li id="frame' + i +'" class="frame_t_'+framesdynamic[i].type+'_btn">\n';
+			}
+			else
+			{
+				strHTML += '<li id="frame' + i +'" class="frame_t_'+framesdynamic[i].type+'">\n';
+			}
+
+			/*strHTML += '\t<div class="frame background" data-type="' + framesdynamic[i].type + '" style="background: url(\''+ framesdynamic[i].image +'\') no-repeat;">\n';
+			strHTML += '\t</div>\n';*/
+			strHTML += '\t<div class="frame content" data-type="' + framesdynamic[i].type + '" style="background-color: #003262">\n';
+			console.log("numero: "+framesdynamic[i].type);
+			switch(framesdynamic[i].type)
+			{
+				case 1: // (T1) ----- V1
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content_btn">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					}
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+					strHTML += '\t</div>\n';
+                    if(i == 3){
+                        strHTML += '\t<div id="nota">' + framesdynamic[i].legal + '</div>\n';
+                    }
+					break;
+
+				case 2: // (T2) ----- V2
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content_btn">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					}
+                    strHTML += '\t\t<span style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+                    strHTML += '\t</div>\n';
+                    //strHTML += '\t<div id="nota">' + framesdynamic[i].legal + '</div>\n';
+					break;
+
+				case 3:  // (T1+T2) ----- V3
+
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content_btn">\n';
+						strHTML += '\t<p class="texto">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+						strHTML += '\t<p class="texto">\n';
+					}
+					if(framesdynamic[i].tit_order <=1)
+					{
+						strHTML += '\t\t<span style="overflow:hidden;" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+	                    strHTML += '\t\t<span style="overflow:hidden;" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+					}
+					else
+					{
+						strHTML += '\t\t<span style="overflow:hidden;" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+						strHTML += '\t\t<span style="overflow:hidden;" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+					}
+					strHTML += '\t</p>\n';
+                    strHTML += '\t</div>\n';
+					break;
+
+				case 4: // (Texto) ----- V4
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content_btn" style="overflow:hidden">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="copy btn">' + framesdynamic[i].texto + '</span>\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</span>\n';
+					}
+	                strHTML += '\t</div>\n';
+					break;
+
+				case 5:  // (T1+T2+Texto) ----- V5
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content_btn">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					}
+					strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</span>\n';
+	                strHTML += '\t</p>\n';
+                    strHTML += '\t</div>\n';
+					break;
+
+				case 6:  // (T1+Oferta) ----- V6
+					strHTML += '\t<div class="frame_content_btn">\n';
+					strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+					strHTML += '\t</div>\n';
+	                strHTML += '\t<div id="nota">' + framesdynamic[i].oferta.nota + '</div>\n';
+					break;
+
+				case 7: // (T1+Texto+Oferta) ----- V7
+
+					strHTML += '\t<div class="frame_content_btn">\n';
+					strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="copy texttofitcopy">' + framesdynamic[i].texto + '</span>\n';
+					strHTML += '\t</div>\n';
+	                strHTML += '\t<div id="nota"><p>' + framesdynamic[i].oferta.nota + '</p></div>\n';
+					break;
+
+				case 8: // (T1+T2+Oferta) ----- V8
+
+					strHTML += '\t<div class="frame_content_btn">\n';
+					strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden" class="texto title2 texttofit2">' + framesdynamic[i].title2 + '</span>\n';
+					strHTML += '\t</div>\n';
+	                strHTML += '\t<div id="nota">' + framesdynamic[i].oferta.nota + '</div>\n';
+					break;
+
+				case 9:  // (T1+Texto) ----- V9
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content" style="height: 50px; bottom: 5px;">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					}
+					//strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<p style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</p>\n';
+					strHTML += '\t\t<p style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</p>\n';
+	                //strHTML += '\t</p>\n';
+                    strHTML += '\t</div>\n';
+					break;
+
+				case 10:  // (T2+Texto) ----- V10
+					if(framesdynamic[i].btn!='')
+					{
+					strHTML += '\t<div class="frame_content" style="height: 50px; bottom: 7px;">\n';
+					}
+					else
+					{
+					strHTML += '\t<div class="frame_content">\n';
+					}
+					//strHTML += '\t<p class="texto">\n';
+					strHTML += '\t\t<p style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</p>\n';
+					strHTML += '\t\t<p style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</p>\n';
+	                //strHTML += '\t</p>\n';
+                    strHTML += '\t</div>\n';
+					break;
+			}
+			if(framesdynamic[i].btn!='')
+			{
+
+				strHTML += '\t\t<div id="boton" class="boton">\n';
+
+                strHTML += '\t\t\t<img src="assets/images/flecha.png"><p class=""id="txtBotonFrame2">'+framesdynamic[i].btn+'</p>\n';
+            	strHTML += '\t\t</div>\n';
+			}
+			strHTML += '\t</div>\n';
+			strHTML += '</li>\n';
+
+		}
+		framesUL.innerHTML = strHTML;
+
+		//$(".copy .btn").textfit('bestfit');
+
+	}
+
+	drawFrame = function(framesdynamic, framesUL, frameNumber, posicion)
+	{
+
+		var frameToRemove = document.getElementById('frame'+posicion);
+
+		if(frameToRemove != null) frameToRemove.remove();
+
+		var strHTML = '';
+		//for(var i=0;i<framesdynamic.length;i++)
+		//{
+
+		var bgColor = '#003262';
+		var bgColorBtn = '#ffffff';
+		var bgColorFlecha = 'blue';
+		if(posicion==0)
+		{
+			/*bgColor = '#003262';
+			bgColorBtn = '#ffffff';
+			bgColorFlecha = 'blue';*/
+			bgColor = '#ffffff';
+			bgColorBtn = '#003262';
+			bgColorFlecha = 'white';
+		}
+		else
+		{
+			bgColor = '#ffffff';
+			bgColorBtn = '#003262';
+			bgColorFlecha = 'white';
+		}
+
+		var i=frameNumber;
+		var align='';
+		var top='';
+
+		if(framesdynamic[i].type==1 || framesdynamic[i].type==2 || framesdynamic[i].type==3 || framesdynamic[i].type==4 || framesdynamic[i].type==5)
+		{
+			if(framesdynamic[i].align!='')
+			{
+				align = '_' + framesdynamic[i].align;
+			}
+			else
+			{
+				align = '';
+			}
+
+			if(framesdynamic[i].top!== undefined && framesdynamic[i].top!='')
+			{
+				top=framesdynamic[i].top;
+			}
+			else
+			{
+				top='';
+			}
+		}
+
+		if((framesdynamic[i].type==5 || framesdynamic[i].type==9 || framesdynamic[i].type==10) && framesdynamic[i].btn!='')
+		{
+			strHTML += '<li style="opacity:0;" id="frame' + posicion +'" class="frame_t_'+framesdynamic[i].type+'_btn">\n';
+		}
+		else
+		{
+			strHTML += '<li style="opacity:0;" id="frame' + posicion +'" class="frame_t_'+framesdynamic[i].type+'">\n';
+		}
+
+		/*strHTML += '\t<div class="frame background" data-type="' + framesdynamic[i].type + '" style="background: url(\''+ framesdynamic[i].image +'\') no-repeat;">\n';
+		strHTML += '\t</div>\n';*/
+		strHTML += '\t<div class="frame content" data-type="' + framesdynamic[i].type + '" style="background-color: ' + bgColor + '">\n';
+
+		switch(framesdynamic[i].type)
+		{
+			case 1: // (T1) ----- V1
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content_btn">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				}
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+				strHTML += '\t</div>\n';
+				break;
+
+			case 2: // (T2) ----- V2
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content_btn">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				}
+                strHTML += '\t\t<span style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+                strHTML += '\t</div>\n';
+                //strHTML += '\t<div id="nota">' + framesdynamic[i].legal + '</div>\n';
+				break;
+
+			case 3:  // (T1+T2) ----- V3
+
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content_btn">\n';
+					strHTML += '\t<p class="texto">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+					strHTML += '\t<p class="texto">\n';
+				}
+				if(framesdynamic[i].tit_order <=1)
+				{
+					strHTML += '\t\t<span style="overflow:hidden;" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+                    strHTML += '\t\t<span style="overflow:hidden;" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+				}
+				else
+				{
+					strHTML += '\t\t<span style="overflow:hidden;" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+					strHTML += '\t\t<span style="overflow:hidden;" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+				}
+				strHTML += '\t</p>\n';
+                strHTML += '\t</div>\n';
+				break;
+
+			case 4: // (Texto) ----- V4
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content_btn" style="overflow:hidden">\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="copy btn">' + framesdynamic[i].texto + '</span>\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</span>\n';
+				}
+                strHTML += '\t</div>\n';
+				break;
+
+			case 5:  // (T1+T2+Texto) ----- V5
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content_btn">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				}
+				strHTML += '\t<p class="texto">\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</span>\n';
+                strHTML += '\t</p>\n';
+                strHTML += '\t</div>\n';
+				break;
+
+			case 6:  // (T1+Oferta) ----- V6
+				strHTML += '\t<div class="frame_content_btn">\n';
+				strHTML += '\t<p class="texto">\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+//				strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+//				strHTML += '\t</div>\n';
+//                strHTML += '\t<div id="nota">' + framesdynamic[i].oferta.nota + '</div>\n';
+                
+                strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ framesdynamic[i].oferta.texto2_1 +'</span>\n';
+                strHTML += '\t\t<span class="oferta_text_2">'+framesdynamic[i].oferta.texto2_2+'</span>\n';
+				strHTML += '\t</div>\n';            
+                strHTML += '\t<div id="nota">' + framesdynamic[i].oferta.nota + '</div>\n';
+				break;
+
+			case 7: // (T1+Texto+Oferta) ----- V7
+
+				strHTML += '\t<div class="frame_content_btn">\n';
+				strHTML += '\t<p class="texto">\n';
+
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="copy texttofitcopy">' + framesdynamic[i].texto + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+				strHTML += '\t</div>\n';
+                strHTML += '\t<div id="nota"><p>' + framesdynamic[i].oferta.nota + '</p></div>\n';
+				break;
+
+			case 8: // (T1+T2+Oferta) ----- V8
+
+				strHTML += '\t<div class="frame_content_btn">\n';
+				strHTML += '\t<p class="texto">\n';
+
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title1 texttofit">' + framesdynamic[i].title1 + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="texto title2 texttofit2">' + framesdynamic[i].title2 + '</span>\n';
+				strHTML += '\t\t<span style="overflow:hidden" class="oferta"> ' + framesdynamic[i].oferta.texto1 + '<span> '+ framesdynamic[i].oferta.descuento +'%</span> '+ (framesdynamic[i].oferta.texto2_1!=''?framesdynamic[i].oferta.texto2_1:framesdynamic[i].oferta.texto2_2) +'</span>\n';
+				strHTML += '\t</div>\n';
+                strHTML += '\t<div id="nota">' + framesdynamic[i].oferta.nota + '</div>\n';
+				break;
+
+			case 9:  // (T1+Texto) ----- V9
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content" style="height: 50px; bottom: 5px;">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				}
+				//strHTML += '\t<p class="texto">\n';
+				strHTML += '\t\t<p style="overflow:hidden" class="texto title1">' + framesdynamic[i].title1 + '</p>\n';
+				strHTML += '\t\t<p style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</p>\n';
+                //strHTML += '\t</p>\n';
+                strHTML += '\t</div>\n';
+				break;
+
+			case 10:  // (T2+Texto) ----- V10
+				if(framesdynamic[i].btn!='')
+				{
+				strHTML += '\t<div class="frame_content" style="height: 50px; bottom: 7px;">\n';
+				}
+				else
+				{
+				strHTML += '\t<div class="frame_content">\n';
+				}
+				//strHTML += '\t<p class="texto">\n';
+				strHTML += '\t\t<p style="overflow:hidden" class="texto title2">' + framesdynamic[i].title2 + '</p>\n';
+				strHTML += '\t\t<p style="overflow:hidden" class="copy">' + framesdynamic[i].texto + '</p>\n';
+                //strHTML += '\t</p>\n';
+                strHTML += '\t</div>\n';
+				break;
+		}
+		if(framesdynamic[i].btn!='')
+		{
+
+			strHTML += '\t\t<div id="boton" class="boton" style="background-color:' + bgColorBtn + '">\n';
+
+            strHTML += '\t\t\t<img src="assets/images/flecha_'+bgColorFlecha+'.png"><p class=""id="txtBotonFrame2" style="color:'+bgColor+'">'+framesdynamic[i].btn+'</p>\n';
+        	strHTML += '\t\t</div>\n';
+		}
+		strHTML += '\t</div>\n';
+		strHTML += '</li>\n';
+
+		//}
+
+		if(posicion==0)
+		{
+			framesUL.innerHTML = strHTML + framesUL.innerHTML;
+		}
+		else
+		{
+			framesUL.innerHTML += strHTML;
+		}
+
+		//$(".copy .btn").textfit('bestfit');
+
+	}
+
+	frame.prototype.init=function(opciones)
+	{
+		var contenedor = T$(opciones.id);
+		var framesUL = this.framesUL = T$$('ul', contenedor)[0];
+
+		this.contenedor = contenedor;
+
+		this.autoLoop = opciones.auto||0;
+		this.loops = opciones.dynamicdata['Loop']==0?1000:opciones.dynamicdata['Loop'];
+		this.currentLoop = 1;
+		this.pauseFlag = 0;
+		this.size = opciones.size;
+		this.url = opciones.dynamicdata['url_destino'];
+        this.legal = opciones.dynamicdata['oferta_nota'];
+
+		this.block = 0;
+		this.block2 = 0;
+
+		this.sliderAnimation = 0;
+
+		this.framesdynamic = processDynamic(opciones.dynamicdata, this.size);
+
+		drawFrame(this.framesdynamic, T$$('ul', contenedor)[0], 0, 0);
+
+		this.caraCubo = 0;
+
+		console.log(this.framesdynamic.length);
+
+		this.framesNum = this.framesdynamic.length;
+
+		console.log(this.framesNum);
+		/*
+		var frames = this.frames = T$$('li', framesUL);
+		var l = frames.length;
+		var i = this.framesNum=this.c=0;
+
+		for(i;i<l;i++)
+		{
+			if(frames[i].parentNode==framesUL)
+			{
+				this.framesNum++;
+				frames[i].style.visibility = 'hidden';
+				frames[i].style.opacity = 0;
+			}
+		}
+		*/
+
+		// Inicializamos la creatividad
+		creative.showAd();
+
+		this.pos(-1,this.autoLoop?1:0);
+	},
+	frame.prototype.auto=function()
+	{
+		console.log("AUTO: " + this.current + " LOOP: " + this.currentLoop);
+
+		//this.framesUL.ai=setInterval(new Function(this.nombre+'.move(1,1)'),this.autoLoop*1000);
+		setTimeout(function(){
+			console.log("TIMEOUT");
+			framesshow.move(1,1);
+		},this.autoLoop*1000);
+	},
+	frame.prototype.move=function(desplazamiento,auto)
+	{
+		console.log("MOVE");
+		if(!this.pauseFlag)
+		{
+
+			this.pos(this.current + desplazamiento, auto);
+		}
+	},
+	frame.prototype.pos=function(posicion,auto){
+		console.log("POS: " + posicion);
+		clearInterval(this.framesUL.ai);
+		clearInterval(this.framesUL.si);
+
+
+		if(posicion==-1)
+		{
+			previous=posicion;
+			posicion++;
+		}
+		else
+		{
+			previous=this.current;
+		}
+		if(posicion==this.framesNum)
+		{
+			console.log("********** NUEVO LOOP");
+			previous=this.current;
+			posicion=0;
+			this.currentLoop++;
+		}
+
+
+		console.log("************ SLIDE params: " + posicion + " --- " + previous + " ************* ");
+
+		this.slide(posicion, previous, auto);
+        
+        $('#frame0').css('opacity',1);
+	},
+	frame.prototype.slide=function(posicion, previous, auto){
+
+		console.log("SLIDE");
+
+		if(previous==-1)
+		{
+			$('#frame'+posicion).css('visibility','visible');
+			$("#frame"+posicion).animate({opacity: 1}, 500, function(){
+
+				//$('#frame0').addClass('frame0_z0');
+				framesshow.current = posicion;
+
+				if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+					if(auto||(framesshow.autoLoop))
+					{
+						framesshow.auto();
+					}
+				}
+			});
+		}
+		else
+		{
+			console.log("CARACUBO: " + framesshow.caraCubo);
+			console.log("POSICION: " + posicion);
+			console.log("PREVIOUS: " + previous);
+			if(framesshow.caraCubo==0)
+			{
+				if(posicion+1<=framesshow.framesNum)
+				{
+					if(posicion==framesshow.framesNum)
+					{
+
+						drawFrame(framesshow.framesdynamic, T$$('ul', framesshow.contenedor)[0], 0, 1);
+					}
+					else
+					{
+						drawFrame(framesshow.framesdynamic, T$$('ul', framesshow.contenedor)[0], posicion, 1);
+                        console.log('aqui oculto 1 y muestro el 0');
+
+					}
+
+					if(framesshow.sliderAnimation == 0)
+					{
+
+						framesshow.block2 = 0;
+
+						//$('#frame0').removeClass('frame0_z0');
+
+//						$("#slider").removeClass('notransition');
+						//$("#slider").addClass('fliptotop');
+                        $('#frame0').delay(1000).fadeOut(500);
+                        $('#frame1').delay(1000).fadeIn(500, function(){
+                            $('#frame1').css('opacity',1);
+                        });
+                        //$('#frame0').css('display', 'none');
+                        //$('#frame1').css('display', 'block');
+                        
+                        if(framesshow.block == 0)
+							{
+								framesshow.block = 1;
+
+								console.log("Transition SLIDER");
+
+								//$("#slider").addClass('notransition');
+								//$('#frame1').addClass('frame1_z0');
+
+								framesshow.caraCubo = 1;
+
+								framesshow.current = posicion;
+
+								if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+									if(auto||(framesshow.autoLoop))
+									{
+										framesshow.sliderAnimation = 1;
+										framesshow.auto();
+									}
+								}
+							}
+
+//						$('#slider').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+//
+//							console.log("Block: " + framesshow.block);
+//
+//							if(framesshow.block == 0)
+//							{
+//								framesshow.block = 1;
+//
+//								console.log("Transition SLIDER");
+//
+//								//$("#slider").addClass('notransition');
+//								//$('#frame1').addClass('frame1_z0');
+//
+//								framesshow.caraCubo = 1;
+//
+//								framesshow.current = posicion;
+//
+//								if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+//									if(auto||(framesshow.autoLoop))
+//									{
+//										framesshow.sliderAnimation = 1;
+//										framesshow.auto();
+//									}
+//								}
+//							}
+//
+//
+//
+//						});
+					}
+				}
+			}
+			else
+			{
+				if(posicion+1<=framesshow.framesNum)
+				{
+					if(posicion==framesshow.framesNum)
+					{
+						drawFrame(framesshow.framesdynamic, T$$('ul', framesshow.contenedor)[0], 0, 0);
+					}
+					else
+					{
+						drawFrame(framesshow.framesdynamic, T$$('ul', framesshow.contenedor)[0], posicion, 0);
+					}
+
+					if(framesshow.sliderAnimation == 1)
+					{
+
+						//$('#frame1').removeClass('frame1_z0');
+
+						//$("#slider").removeClass('notransition');
+
+						framesshow.block = 0;
+                        $('#frame0').delay(3000).fadeIn(500, function(){
+                            $('#frame0').css('opacity',1);
+                        });
+                        $('#frame1').delay(1500).fadeOut(500);
+                        //$('#frame1').css('display', 'none');
+                        //$('#frame0').css('display', 'block');
+
+						if(posicion+1<=framesshow.framesNum)
+						{
+							//$("#slider").removeClass('fliptotop');
+						}
+						else
+						{
+							//$("#slider").toggleClass('fliptotop');
+						}
+                        
+                        
+                        console.log("ENTRAAAAAAAAA");
+                        if(framesshow.block2 == 0)
+							{
+								framesshow.block2 = 1;
+
+								//$("#slider").addClass('notransition');
+								//$('#frame0').addClass('frame0_z0');
+
+								framesshow.caraCubo = 0;
+								framesshow.current = posicion;
+								if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+									if(auto||(framesshow.autoLoop))
+									{
+
+										framesshow.sliderAnimation = 0;
+										framesshow.auto();
+									}
+								}
+							}
+
+//						$('#slider').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+//                            console.log("ENTRAAAAAAAAA");
+//							if(framesshow.block2 == 0)
+//							{
+//								framesshow.block2 = 1;
+//
+//								$("#slider").addClass('notransition');
+//								//$('#frame0').addClass('frame0_z0');
+//
+//								framesshow.caraCubo = 0;
+//								framesshow.current = posicion;
+//								if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+//									if(auto||(framesshow.autoLoop))
+//									{
+//
+//										framesshow.sliderAnimation = 0;
+//										framesshow.auto();
+//									}
+//								}
+//							}
+
+//						});
+
+					}
+				}
+			}
+
+			/*
+
+			$('#frame'+previous).animate({opacity: 0}, 750, function(){
+				$('#frame'+previous).css('visibility','hidden');
+			});
+
+			$('#frame'+posicion).css('visibility','visible');
+			$("#frame"+posicion).animate({opacity: 1}, 750, function(){
+				framesshow.current = posicion;
+				if(!(framesshow.currentLoop==framesshow.loops && posicion+1==framesshow.framesNum)){
+					if(auto||(framesshow.autoLoop))
+					{
+						//framesshow.auto();
+					}
+				}
+			});
+			*/
+		}
+
+	},
+	frame.prototype.pause=function()
+	{
+		this.pauseFlag=1;
+	},
+	frame.prototype.restart=function()
+	{
+		this.pauseFlag=0;
+	},
+	frame.prototype.stop=function()
+	{
+		this.pauseFlag=1;
+		this.currentLoop = this.loops;
+		this.pos(this.framesNum-1,0);
+	};
+	return{frame:frame}
+}();
+
+
+NHDYNAMIC.frame = function(){
+
+	function frame(type, opciones)
+	{
+		this.type = type;
+		this.init(opciones);
+	}
+
+	frame.prototype.init = function(opciones)
+	{
+		this.image = opciones.image;
+		this.title1 = opciones.title1;
+		this.title2 = opciones.title2;
+		this.tit_order = opciones.tit_order;
+		this.align = opciones.align;
+		this.top = opciones.top;
+		this.btn = opciones.btn;
+        this.legal = opciones.legal;
+        
+		switch(this.type)
+		{
+			case 4:
+				this.texto = opciones.texto;
+				break;
+
+			case 5:
+				this.texto = opciones.texto;
+				break;
+
+			case 6:
+				this.oferta = opciones.oferta;
+				break;
+
+			case 7:
+				this.texto = opciones.texto;
+				this.oferta = opciones.oferta;
+				break;
+
+			case 8:
+				this.oferta = opciones.oferta;
+				break;
+
+			case 9:
+				this.texto = opciones.texto;
+				break;
+
+			case 10:
+				this.texto = opciones.texto;
+				break;
+		}
+	};
+	return{frame:frame}
+}();
+
+NHDYNAMIC.oferta = function(){
+
+	function oferta(opciones)
+	{
+		this.init(opciones);
+	}
+
+	oferta.prototype.init = function(opciones)
+	{
+		this.texto1 = opciones.texto_1;
+		this.descuento = opciones.descuento;
+		this.texto2_1 = opciones.texto_2_1;
+		this.texto2_2 = opciones.texto_2_2;
+		this.nota = opciones.nota;
+
+	};
+	return{oferta:oferta}
+}();
+
+framesshow = new NHDYNAMIC.frames.frame('framesshow',{
+    id:'slider',
+    auto: window.timeFrame,
+    size: window.size,
+    dynamicdata: creative.dynamicData
+  });

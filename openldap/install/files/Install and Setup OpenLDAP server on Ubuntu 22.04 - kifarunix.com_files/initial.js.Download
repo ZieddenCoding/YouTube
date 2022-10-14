@@ -1,0 +1,215 @@
+/**
+     *
+     * @param {string} element : Es el elemento DOM donde tenemos el texto que queremos partir
+     * @returns {void}
+     */
+var size = '468x60';
+var timeFrame = 9;
+var framesshow;
+var stopped = 0;
+var creative = {};
+creative.init = function () {
+  creative.setupDOMElements();
+
+  if (Enabler.isInitialized()) {
+    creative.enablerInitHandler();
+  } else {
+    Enabler.addEventListener(
+      studio.events.StudioEvent.INIT,
+      creative.enablerInitHandler);
+  }
+};
+
+creative.setupDOMElements = function () {
+  creative.domElements = {};
+  creative.domElements.capaclick = document.getElementById('capaclick');
+
+};
+
+creative.enablerInitHandler = function (event) {
+  creative.dynamicDataAvailable();
+
+  creative.domElements.capaclick.addEventListener('click', creative.exitClickHandler);
+
+  if (Enabler.isPageLoaded()) {
+    creative.pageLoadHandler();
+  } else {
+    Enabler.addEventListener(
+      studio.events.StudioEvent.PAGE_LOADED,
+      creative.pageLoadHandler);
+  }
+};
+
+var dynamicContent = {};
+creative.dynamicDataAvailable = function () {
+    Enabler.setProfileId(1083353);
+
+    dynamicContent.NH_content= [{}];
+    dynamicContent.NH_content[0]._id = 0;
+    dynamicContent.NH_content[0].Id = 1;
+    dynamicContent.NH_content[0].Report_label = "IC-Default-Belgium";
+    dynamicContent.NH_content[0].Destination_Id = "";
+    dynamicContent.NH_content[0].Destino = "";
+    dynamicContent.NH_content[0].Default = false;
+    dynamicContent.NH_content[0].StartDate = {};
+    dynamicContent.NH_content[0].StartDate.RawValue = "2016/03/03 00:00 (+01:00)";
+    dynamicContent.NH_content[0].StartDate.UtcValue = 1456959600000;
+    dynamicContent.NH_content[0].EndDate = {};
+    dynamicContent.NH_content[0].EndDate.RawValue = "2016/04/03 23:59 (+01:00)";
+    dynamicContent.NH_content[0].EndDate.UtcValue = 1459724340000;
+    dynamicContent.NH_content[0].Active = true;
+    dynamicContent.NH_content[0].Loop = 2;
+    dynamicContent.NH_content[0].TimeFrame = 4;
+    dynamicContent.NH_content[0].Imagenes_fondo = {"background_728x90_3_de.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135480/63009_20160830235830352_background_728x90_3_de.jpg"},"background_300x600_3_de.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45136462/63009_20160830235628332_background_300x600_3_de.jpg"},"background_300x250_3_de.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140304/63009_20160830235544069_background_300x250_3_de.jpg"},"background_160x600_3_de.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140301/63009_20160830235356548_background_160x600_3_de.jpg"},"background_728x90_3_it.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45136464/63009_20160830235845584_background_728x90_3_it.jpg"},"background_300x600_3_it.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135198/63009_20160830235647696_background_300x600_3_it.jpg"},"background_300x250_3_it.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140017/63009_20160830235606297_background_300x250_3_it.jpg"},"background_160x600_3_it.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45136459/63009_20160830235422099_background_160x600_3_it.jpg"},"background_728x90_3_ne.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45136465/63009_20160830235849078_background_728x90_3_ne.jpg"},"background_300x600_3_ne.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140020/63009_20160830235651534_background_300x600_3_ne.jpg"},"background_300x250_3_ne.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140018/63009_20160830235613631_background_300x250_3_ne.jpg"},"background_160x600_3_ne.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140014/63009_20160830235426119_background_160x600_3_ne.jpg"},"background_728x90_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41587847/63009_20160223090318581_background_728x90_3.jpg"},"background_728x90_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41587845/63009_20160223090310937_background_728x90_2.jpg"},"background_728x90_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41586777/63009_20160223090304488_background_728x90_1.jpg"},"background_300x600_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/42117744/63009_20160321053906139_background_300x600_3.jpg"},"background_300x600_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41588803/63009_20160223090254617_background_300x600_2.jpg"},"background_300x600_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/42116566/63009_20160321044806800_background_300x600_1.jpg"},"background_300x250_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41582978/63009_20160223075456112_background_300x250_3.jpg"},"background_300x250_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41586584/63009_20160223090233543_background_300x250_2.jpg"},"background_300x250_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41583530/63009_20160223075958255_background_300x250_1.jpg"},"background_160x600_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41582976/63009_20160223075420784_background_160x600_3.jpg"},"background_160x600_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41587933/63009_20160223090152297_background_160x600_2.jpg"},"background_160x600_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41583340/63009_20160223075917384_background_160x600_1.jpg"},"background_728x90_3_pt.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45136466/63009_20160830235852877_background_728x90_3_pt.jpg"},"background_160x600_3_pt.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140104/63009_20160830235435740_background_160x600_3_pt.jpg"},"background_300x250_3_pt.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140305/63009_20160830235617624_background_300x250_3_pt.jpg"},"background_300x600_3_pt.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135478/63009_20160830235655183_background_300x600_3_pt.jpg"},"background_728x90_3_fr.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135481/63009_20160830235841975_background_728x90_3_fr.jpg"},"background_300x600_3_fr.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140019/63009_20160830235643672_background_300x600_3_fr.jpg"},"background_300x250_3_fr.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135197/63009_20160830235602252_background_300x250_3_fr.jpg"},"background_160x600_3_fr.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140103/63009_20160830235414741_background_160x600_3_fr.jpg"},"background_200x600_3_fr.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140610/63009_20160831243027852_background_200x600_3_fr.jpg"},"background_728x90_3_es.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140022/63009_20160830235837851_background_728x90_3_es.jpg"},"background_728x90_3_en.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45139809/63009_20160830234044747_background_728x90_3_en.jpg"},"background_160x600_3_es.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140102/63009_20160830235410672_background_160x600_3_es.jpg"},"background_300x250_3_es.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140016/63009_20160830235553260_background_300x250_3_es.jpg"},"background_300x600_3_es.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140306/63009_20160830235639727_background_300x600_3_es.jpg"},"background_300x600_3_en.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135299/63009_20160830234020490_background_300x600_3_en.jpg"},"background_160x600_3_en.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45139806/63009_20160830233901043_background_160x600_3_en.jpg"},"background_300x250_3_en.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135697/63009_20160830233954066_background_300x250_3_en.jpg"},"background_200x600_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41586582/63009_20160223090219858_background_200x600_3.jpg"},"background_200x600_3_pt.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140324/63009_20160831243052442_background_200x600_3_pt.jpg"},"background_200x600_3_ne.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140323/63009_20160831243045234_background_200x600_3_ne.jpg"},"background_200x600_3_it.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140322/63009_20160831243037661_background_200x600_3_it.jpg"},"background_200x600_3_en.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45135993/63009_20160830233929817_background_200x600_3_en.jpg"},"background_200x600_3_de.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45139855/63009_20160831243006724_background_200x600_3_de.jpg"},"background_200x600_3_es.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/45140321/63009_20160831243020444_background_200x600_3_es.jpg"},"background_754x74_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/42431985/63009_20160407045546349_background_754x74_1.jpg"},"background_754x74_3.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41586783/63009_20160223090339658_background_754x74_3.jpg"},"background_754x74_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41586384/63009_20160223090332391_background_754x74_2.jpg"},"background_200x600_2.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41584997/63009_20160223090213268_background_200x600_2.jpg"},"background_200x600_1.jpg":{"Type":"file","Url":"https://s0.2mdn.net/ads/richmedia/studio/41584995/63009_20160223090208410_background_200x600_1.jpg"}};
+    dynamicContent.NH_content[0].youtube_ids = "";
+    dynamicContent.NH_content[0].youtube_frame = "";
+    dynamicContent.NH_content[0].btn_color = "#003262";
+    dynamicContent.NH_content[0].acelerador_color = "#f0a321,#003262";
+    dynamicContent.NH_content[0].frame_cierre_color = "#003262";
+    dynamicContent.NH_content[0].frame_1_active = true;
+    dynamicContent.NH_content[0].frame_1_tit_1 = "";
+    dynamicContent.NH_content[0].frame_1_tit_2 = "Plus de 383 h\u00F4tels dans 29 pays";
+    dynamicContent.NH_content[0].frame_1_tit_order = "";
+    dynamicContent.NH_content[0].frame_1_text = "";
+    dynamicContent.NH_content[0].frame_1_align = "";
+    dynamicContent.NH_content[0].frame_1_top = "";
+    dynamicContent.NH_content[0].frame_1_oferta = false;
+    dynamicContent.NH_content[0].frame_1_btn = "";
+    dynamicContent.NH_content[0].frame_1_cierre = false;
+    dynamicContent.NH_content[0].frame_1_cierre_texto = "";
+    dynamicContent.NH_content[0].frame_1_acelerador = false;
+    dynamicContent.NH_content[0].frame_1_acelerador_texto = "";
+    dynamicContent.NH_content[0].frame_2_active = true;
+    dynamicContent.NH_content[0].frame_2_tit_1 = "";
+    dynamicContent.NH_content[0].frame_2_tit_2 = "";
+    dynamicContent.NH_content[0].frame_2_tit_order = "";
+    dynamicContent.NH_content[0].frame_2_text = "";
+    dynamicContent.NH_content[0].frame_2_align = "";
+    dynamicContent.NH_content[0].frame_2_top = "";
+    dynamicContent.NH_content[0].frame_2_oferta = true;
+    dynamicContent.NH_content[0].frame_2_btn = "R\u00C9SERVEZ";
+    dynamicContent.NH_content[0].frame_2_cierre = false;
+    dynamicContent.NH_content[0].frame_2_cierre_texto = "";
+    dynamicContent.NH_content[0].frame_2_acelerador = false;
+    dynamicContent.NH_content[0].frame_2_acelerador_texto = "";
+    dynamicContent.NH_content[0].frame_3_active = true;
+    dynamicContent.NH_content[0].frame_3_tit_1 = "";
+    dynamicContent.NH_content[0].frame_3_tit_2 = "";
+    dynamicContent.NH_content[0].frame_3_tit_order = "";
+    dynamicContent.NH_content[0].frame_3_text = "";
+    dynamicContent.NH_content[0].frame_3_align = "";
+    dynamicContent.NH_content[0].frame_3_top = "";
+    dynamicContent.NH_content[0].frame_3_oferta = true;
+    dynamicContent.NH_content[0].frame_3_btn = "R\u00C9SERVEZ";
+    dynamicContent.NH_content[0].frame_3_cierre = false;
+    dynamicContent.NH_content[0].frame_3_cierre_texto = "";
+    dynamicContent.NH_content[0].frame_3_acelerador = false;
+    dynamicContent.NH_content[0].frame_3_acelerador_texto = "";
+    dynamicContent.NH_content[0].frame_4_active = false;
+    dynamicContent.NH_content[0].frame_4_tit_1 = "";
+    dynamicContent.NH_content[0].frame_4_tit_2 = "";
+    dynamicContent.NH_content[0].frame_4_tit_order = "";
+    dynamicContent.NH_content[0].frame_4_text = "";
+    dynamicContent.NH_content[0].frame_4_align = "";
+    dynamicContent.NH_content[0].frame_4_top = "";
+    dynamicContent.NH_content[0].frame_4_oferta = false;
+    dynamicContent.NH_content[0].frame_4_btn = "";
+    dynamicContent.NH_content[0].frame_4_cierre = false;
+    dynamicContent.NH_content[0].frame_4_cierre_texto = "";
+    dynamicContent.NH_content[0].frame_4_acelerador = false;
+    dynamicContent.NH_content[0].frame_4_acelerador_texto = "";
+    dynamicContent.NH_content[0].frame_4_idioma = "";
+    dynamicContent.NH_content[0].oferta_txt_1 = "Jusqu\'\u00E0";
+    dynamicContent.NH_content[0].oferta_desc = 25;
+    dynamicContent.NH_content[0].oferta_txt_2_1 = "";
+    dynamicContent.NH_content[0].oferta_txt_2_2 = "de r\u00E9duction avec NH Rewards";
+    dynamicContent.NH_content[0].oferta_nota = "";
+    dynamicContent.NH_content[0].url_destino = {};
+    dynamicContent.NH_content[0].url_destino.Url = "http://www.nh-hotels.fr/?campid=%ebuy!&ct=%eaid!";
+    Enabler.setDevDynamicContent(dynamicContent);
+
+    creative.dynamicData = dynamicContent.NH_content[0];
+
+    var urlSuffix = Enabler.getParameter('exit_suffix');
+    var url = creative.dynamicData.url_destino.Url; 
+    var symbol = '?';
+    if(urlSuffix){
+     if(url.indexOf("?")> -1){
+         symbol = "&";
+     }
+    url = url + symbol + urlSuffix;
+    }
+    
+    creative.dynamicExitUrl = url;
+
+    // creative.dynamicExitUrl = creative.dynamicData.url_destino.Url;
+
+    window.timeFrame = creative.dynamicData['TimeFrame']==0?9:creative.dynamicData['TimeFrame'];
+  
+};
+
+
+creative.closeClickHandler = function (event) {
+  studioinnovation.youtube.requestYTAdClose('creative2yt_requestClose');
+};
+
+creative.exitClickHandler = function (event) {
+
+  Enabler.counter('btn_frame_'+(framesshow.current+1));
+  Enabler.exitOverride("exit", creative.dynamicExitUrl);
+
+  if(stopped==0)
+  {
+    framesshow.stop();
+    stopped = 1;
+  }
+  
+};
+
+creative.pageLoadHandler = function (event) {
+  creative.initAd();
+};
+
+creative.initAd = function () {
+
+  var external_css = document.createElement('link');
+  external_css.setAttribute('rel', 'stylesheet');
+  external_css.setAttribute('type', 'text/css');
+  external_css.setAttribute('href', Enabler.getUrl('assets/css/style.css'));
+  document.getElementsByTagName('head')[0].appendChild(external_css);
+
+  var external_javascript = document.createElement('script');
+  external_javascript.setAttribute('type', 'text/javascript');
+  external_javascript.setAttribute('src', Enabler.getUrl('assets/js/jquery.textfit.min.js'));
+  document.getElementsByTagName('head')[0].appendChild(external_javascript);
+
+  var external_javascript = document.createElement('script');
+  external_javascript.setAttribute('type', 'text/javascript');
+  external_javascript.setAttribute('src', Enabler.getUrl('assets/js/nhdynamic.js'));
+  document.getElementsByTagName('head')[0].appendChild(external_javascript);
+
+};
+
+creative.showAd = function () {
+  document.getElementById('content').className = "show";
+  document.getElementById('capaclick').className = "show";
+  document.getElementById('loader').className = "hide";
+    
+    console.log(navigator.userAgent);
+    var nav = navigator.userAgent.toLowerCase();
+
+    if( nav.indexOf('nt 10.0') != -1 || nav.indexOf('nt 6.1') != -1 ){
+        $('#content #slider ul li.frame_t_8 p').css({top:'-4px!important'});
+        $('#content #slider ul li.frame_t_8 span.title1').css({marginTop:'-5px!important'});
+    }
+};
+
+
+window.addEventListener('load', creative.init.bind(creative));
+
+
+
+
+
+
+

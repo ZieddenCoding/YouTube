@@ -1,0 +1,48 @@
+
+var ftGUID_6387955="3918B59799CE56";
+var ftConfID_6387955="0";
+var ftParams_6387955="ftOBA=1&ft_domain=kifarunix.com&ft_ifb=1&ft_agentEnv=0&ft_referrer=https%3A%2F%2Fkifarunix.com%2F&gdpr=1&gdpr_consent=CPg1YI9Pg1YJCErACCENCkCsAP_AAH_AACiQJDtd_H__bW9r-f5_aft0eY1P9_r37uQzDhfNk-8F3L_W_LwX52E7NF36tq4KmR4ku1LBIUNlHMHUDUmwaokVryHsak2cpzNKJ7BEknMZOydYGF9vmxtj-QKY7_5_d3bx2D-t_9v239z3z81Xn3d53-_03LCdV5_9Dfn9fR_bc9KPt_58v8v8_____3_e__3_7994JCAEmGrcQBdiWOBNoGEUCIEYVhIVQKACCgGFogMAHBwU7KwCfWECABAKAIwIgQ4AowIBAAABAEhEAEgRYIAAARAIAAQAIhEIACBgEFABYGAQAAgGgYohQACBIQZEBEUpgQEQJBAS2VCCUF0hphAHWWAFBIjYqABEAAArAAEBYOAYIkBKxYIEmKN8gBGCFAKJUK1AAAAA.YAAAAAAAAAAA&us_privacy=${US_PRIVACY}&cachebuster=979432.7536340905&ft_dv=%5B%25ft_dv%25%5D";
+var ftKeyword_6387955="";
+var ftCustom_6387955="";
+var ftSection_6387955="";
+var ftSegment_6387955="um2,w2c,acfu,agbp,ag5d,aiia,aido,aixc,ai23";
+var ftSegmentList_6387955=[{s:'um2'},{s:'w2c'},{s:'acfu'},{s:'agbp'},{s:'ag5d'},{s:'aiia'},{s:'aido'},{s:'aixc'},{s:'ai23'}];
+var ftRuleMatch_6387955="0";
+var ftTimestamp_6387955="1665752971";
+var ftGeoC2_6387955="de";
+var ftGeoState_6387955="bb";
+var ftGeoCity_6387955="neuruppin";
+var ftISP_6387955="deutsche telekom ag";
+var ftSpeed_6387955="xdsl";
+var ftDMA_6387955="276007";
+var ftLong_6387955="12.81";
+var ftLat_6387955="52.92";
+var ftPostal_6387955="16816";
+var ftTimeZone_6387955="200";
+var ftMobileCarrier_6387955="";
+var ftImp6387955 = {};
+ftImp6387955.privacy = "x";
+ftImp6387955.guidAge = "1482";
+ftImp6387955.impID = "B3FFE9D3-F47E-1B95-4732-D587FF3A136A";
+ftImp6387955.duid = "FT:3918B59799CE56";
+
+ftImp6387955.ft_tpplid = "";
+ftImp6387955.ft_c = {};
+ftImp6387955.gdpr = "1";
+ftImp6387955.gdpr_consent = "CPg1YI9Pg1YJCErACCENCkCsAP_AAH_AACiQJDtd_H__bW9r-f5_aft0eY1P9_r37uQzDhfNk-8F3L_W_LwX52E7NF36tq4KmR4ku1LBIUNlHMHUDUmwaokVryHsak2cpzNKJ7BEknMZOydYGF9vmxtj-QKY7_5_d3bx2D-t_9v239z3z81Xn3d53-_03LCdV5_9Dfn9fR_bc9KPt_58v8v8_____3_e__3_7994JCAEmGrcQBdiWOBNoGEUCIEYVhIVQKACCgGFogMAHBwU7KwCfWECABAKAIwIgQ4AowIBAAABAEhEAEgRYIAAARAIAAQAIhEIACBgEFABYGAQAAgGgYohQACBIQZEBEUpgQEQJBAS2VCCUF0hphAHWWAFBIjYqABEAAArAAEBYOAYIkBKxYIEmKN8gBGCFAKJUK1AAAAA.YAAAAAAAAAAA";
+ftImp6387955.gdpr_pd = "";
+ftImp6387955.oob_consent = "";
+ftImp6387955.gdprStoredConsent = "";
+ftImp6387955.us_privacy = "!!US_PRIVACY!";
+
+ftImp6387955.jsAppend = "1";
+(function(){
+    var tag = document.getElementById('ft_servedby_6387955') || (function(s){
+    	return s[s.length-1];
+    }(document.getElementsByTagName('script'))),
+           js = document.createElement('script');
+    js.src =
+"https://cdn.flashtalking.com/xre/638/6387955/3882818/js/j-6387955-3882818.js";
+    js.id = "ftscript_m6387955";
+    tag.parentNode.insertBefore(js, tag);
+}());
