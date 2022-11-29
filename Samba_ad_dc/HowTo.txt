@@ -1,0 +1,69 @@
+################
+mit # beginnende Zeilen sind commands die asugeführt werden müssen
+################
+
+# nano /etc/netplan/00-installer-config.yaml
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.2.236/24]
+      gateway4: 192.168.2.1
+      nameservers:
+              addresses: [8.8.8.8,8.8.4.4]
+  version: 2
+
+# netplan apply
+# timedatectl
+# date
+# timedatectl list-timezones
+Europe/Berlin
+
+# timedatectl set-timezone Europe/Berlin
+# apt-get update
+# nano /etc/hostname
+dc1.network.local
+
+# nano /etc/hosts
+192.168.2.236 dc1.network.local dc1
+
+#reboot
+# apt-get install samba krb5-user krb5-config winbind smbclient bind9
+NETWORK.LOCAL
+dc1.network.local
+dc1.network.local
+
+# mv /etc/samba/smb.conf /etc/samba/smb.conf.orginal
+# samba-tool domain provision
+DNS bind9_dlz
+
+# mv /etc/krb5.conf /etc/krb5.conf.initial
+# cp /var/lib/samba/private/krb5.conf /etc/
+# systemctl disable --now smbd winbind systemd-resolved
+# systemctl unmask samba-ad-dc
+# systemctl enable --now samba-ad-dc
+# samba-tool domain level show
+
+# named -v
+# nano /etc/bind/named.conf
+[add] include "/var/lib/samba/bind-dns/named.conf";
+
+# nano /var/lib/samba/bind-dns/named.conf
+
+# nano /etc/bind/named.conf.options
+
+tkey-gssapi-keytab "/usr/local/samba/private/dns.keytab";
+
+[EDIT] Forward
+        //dnssec-validation auto;
+        dnssec-validation no;
+
+# service bind9 restart
+# service bind9 status
+
+# rm -f /etc/resolv.conf && nano /etc/resolv.conf
+nameserver 127.0.0.1
+domain network.local
+
+# samba-tool user create user01
+
