@@ -28,7 +28,12 @@ npm i @altv/types-client
 npm i @altv/types-natives
 ```
 ```
-npm i @altv/types-natives
+npm i @altv/types-webview
+```
+
+```
+/// <reference types="@altv/types-client" />
+/// <reference types="@altv/types-natives" />
 ```
 
 # TypeScript
