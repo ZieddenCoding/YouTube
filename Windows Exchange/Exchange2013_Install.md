@@ -2,10 +2,15 @@
 
 ###### Was wird benötigt?
 [Exchange Setup](https://www.microsoft.com/de-DE/download/details.aspx?id=58392 "Exchange Setup")
+
 [Visual C++ Redistributable Packages for Visual Studio 2013](https://www.microsoft.com/en-us/download/details.aspx?id=40784 "Visual C++ Redistributable Packages for Visual Studio 2013")
+
 [.NET Framework 4.7.2 (Direkt Download)](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net472-web-installer ".NET Framework 4.7.2 (Direkt Download)")
+
 [Unified Communications Managed API 4.0 Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=34992 "Unified Communications Managed API 4.0 Runtime")
+
 [Microsoft Office 2010 Filter Packs](https://www.microsoft.com/en-us/download/details.aspx?id=17062 "Microsoft Office 2010 Filter Packs")
+
 [Service Pack 2 für Microsoft Office 2010 Filter Pack (KB2687447) 64-Bit-Edition](https://www.microsoft.com/de-de/download/confirmation.aspx?id=39668 "Service Pack 2 für Microsoft Office 2010 Filter Pack (KB2687447) 64-Bit-Edition")
 
 ###### Installations Command
