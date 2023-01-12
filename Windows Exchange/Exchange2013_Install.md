@@ -1,4 +1,4 @@
-# Windows Server 2012 R2 Installieren
+# Windows Exchange Server 2013 Installieren
 
 ###### Was wird benötigt?
 [Exchange Setup](https://www.microsoft.com/de-DE/download/details.aspx?id=58392 "Exchange Setup")
